@@ -21,18 +21,17 @@ FetchContent_MakeAvailable(fmtlib)
 
 enable_testing()
 
-add_executable(no_base_class_ut_stuff_test
-    test/no_base_class_ut_stuff_test.cpp)
+add_executable(serialization_test
+    test/serialization_test.cpp)
 
-target_link_libraries(no_base_class_ut_stuff_test
+target_link_libraries(serialization_test
 PRIVATE
     GTest::gtest_main)
 
-gtest_discover_tests(no_base_class_ut_stuff_test)
+gtest_discover_tests(serialization_test)
 
-add_executable(no_base_class_ut_stuff
+add_library(byte_stream
     src/int_string_message.h
-    src/main.cpp
     src/message_builder.h
     src/message_deserializer.cpp
     src/message_deserializer.h
@@ -41,10 +40,14 @@ add_executable(no_base_class_ut_stuff
     src/message_output_stream.h
     src/message_serializer.cpp
     src/message_serializer.h
-    src/mockable.h)
+    src/mockable.h
+    src/return_code.h)
+
+add_executable(no_base_class_ut_stuff src/main.cpp)
 
 target_link_libraries(no_base_class_ut_stuff
 PRIVATE
-    fmt::fmt)
+    fmt::fmt
+    byte_stream)
 
 target_compile_features(no_base_class_ut_stuff PRIVATE cxx_std_14)

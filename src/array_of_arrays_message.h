@@ -27,7 +27,7 @@ struct array_of_arrays_message {
         max_size = 5u
     };
 
-    using size_type            = std::uint32_t;
+    using size_type  = std::uint32_t;
     using value_type = std::array<subarray, max_size>;
 
     enum : uint32_t {
