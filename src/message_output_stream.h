@@ -1,22 +1,26 @@
 #ifndef MESSAGE_OUTPUT_STREAM_H
 #define MESSAGE_OUTPUT_STREAM_H
 
-#include "mockable.h"
+#include <cstdint>
+#include <vector>
+
 #include "message_serializer.h"
 #include "message_deserializer.h"
-
-MOCKABLE_INCLUDE("message_output_stream.h")
 
 namespace nb {
 
 class message_output_stream
 {
-MOCKABLE_PRIVATE:
-    MOCKABLE(message_serializer) _serializer;
-    message_deserializer _deserializer;
+    message_serializer _serializer;
 
 public:
     message_output_stream() = default;
+
+    void write(int_string_message const&);
+    void write(array_of_arrays_message const&);
+
+    void write(std::vector<int_string_message> const&);
+    void write(std::vector<array_of_arrays_message> const&);
 };
 
 }
